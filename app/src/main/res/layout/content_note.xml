@@ -19,7 +19,7 @@
             android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:hint="Edit title"/>
 
         <EditText
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/titleView"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:hint="Edit description"/>
 
 

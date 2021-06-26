@@ -8,14 +8,14 @@
 
     <TextView
         android:id="@+id/text_view1"
-        android:layout_width="341dp"
+        android:layout_width="0dp"
         android:layout_height="25dp"
         android:text="line1"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/text_view2"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -37,16 +37,15 @@
 
     <Button
         android:id="@+id/imageView"
+        android:layout_width="46dp"
+        android:layout_height="match_parent"
         android:background="?android:attr/selectableItemBackground"
         android:text="&#8942;"
         android:textSize="20sp"
-        android:layout_width="46dp"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

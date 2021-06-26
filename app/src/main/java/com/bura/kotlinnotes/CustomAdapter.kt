@@ -1,11 +1,20 @@
 package com.bura.kotlinnotes
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -32,12 +41,19 @@ class CustomAdapter(private val customList: MutableList<Note>, private val liste
         private var db: NoteDatabase?=null
         private var notedao:NoteDao?=null
 
+        private val CHANNEL_ID = "channel_1"
+        private val notificationId = 1234;
+
+
         val recyclerView: RecyclerView = (itemView.context as MainActivity).findViewById(R.id.recyclerView)
         //constructor
         // Define click listener for the ViewHolder's View.
         init {
             itemView.setOnClickListener(this)
             button.setOnClickListener(this)
+
+
+            createNotificationChannel()
 
             db = Room.databaseBuilder(
                 (itemView.context as MainActivity),
@@ -64,6 +80,10 @@ class CustomAdapter(private val customList: MutableList<Note>, private val liste
                             }
 
                         }
+
+                        R.id.notify->{
+                            sendNotification(customList[position].title, customList[position].desc)
+                        }
                         //more options
 
                     }
@@ -74,6 +94,33 @@ class CustomAdapter(private val customList: MutableList<Note>, private val liste
             }
 
 
+        }
+
+       private fun createNotificationChannel(){
+           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+               val name = "com.bura.kotlinnotes.channelname"
+               val desc = "com.bura.kotlinnotes.channeldesc"
+               val importance = NotificationManager.IMPORTANCE_HIGH
+               val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                   description=desc
+
+               }
+               val notificationManager: NotificationManager = (itemView.context as MainActivity).getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(channel)
+           }
+       }
+
+        private fun sendNotification(title:String, desc:String){
+            val builder = NotificationCompat.Builder(itemView.context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(title)
+                .setContentText(desc    )
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+            with(NotificationManagerCompat.from(itemView.context)){
+                notify(notificationId,builder.build())
+
+            }
         }
 /*
         fun onButtonClick(){

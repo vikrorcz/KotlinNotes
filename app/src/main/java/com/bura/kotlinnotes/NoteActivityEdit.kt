@@ -17,6 +17,7 @@ class NoteActivityEdit: AppCompatActivity() {
     private var db: NoteDatabase?=null
     private var notedao:NoteDao?=null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
@@ -90,6 +91,7 @@ class NoteActivityEdit: AppCompatActivity() {
             }
         }
     }
+
 
 
 }

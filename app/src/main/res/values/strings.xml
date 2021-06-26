@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KotlinNotes</string>
+    <string name="delete">Delete</string>
+    <string name="notify">Notify</string>
 </resources>
